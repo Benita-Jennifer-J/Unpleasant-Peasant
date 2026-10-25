@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Unpleasant Pleasant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap" id="intro-stage">
+
+  <!-- PAGE 1: THE PROCLAMATION -->
+  <section id="intro" aria-labelledby="intro-title">
+    <div class="sheet-wrap"><div class="sheet">
+      <p class="eyebrow settle">Hear ye! Hear ye! Mostly ye!</p>
+      <h1 class="title settle" id="intro-title" tabindex="-1">The Unpleasant Pleasant</h1>
+      <p class="sub">Help for peasants. Not good help. But help.</p>
+      <hr class="rule">
+
+      <div class="proclaim">
+        <p>Welcome, wretch! Thou hast found <strong>Thatch Support</strong>, where our learned Brothers solve thy woes. None of them can read, but all are very confident.</p>
+        <p>Plague? Taxes? Cow in the bed? Bring it hither. Our cures are Bad, Worse, and sometimes Flammable.</p>
+      </div>
+
+      <div class="warning">
+        <p><span class="clabel">Warning</span>Bishops, witches, and tax men should not enter. Also people with good sense. They never stay long anyway.</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" id="enter">Enter, if thou darest</button>
+        <button class="btn ghost" type="button" id="flee">Flee in terror</button>
+      </div>
+      <p class="msg" id="flee-msg" role="status"></p>
+
+      <hr class="rule">
+      <p class="colophon">Printed in 1665 by a man with a cough.</p>
+    </div></div>
+  </section>
+
+  <!-- PAGE 2: CHOOSE A VILLAGE -->
+  <section id="villages" aria-labelledby="villages-title" hidden>
+    <div class="sheet-wrap"><div class="sheet">
+      <p class="eyebrow">The Register of Parishes</p>
+      <h1 class="title" id="villages-title" tabindex="-1">Choose Thy Village</h1>
+      <p class="sub">Each hath its own misery. Pick the one that fitteth thy complaint, or thy cart.</p>
+      <hr class="rule">
+      <div class="vgrid" id="vgrid"></div>
+      <hr class="rule">
+      <p class="colophon" style="margin-top:0">Thou mayst change thy mind later, but never without regret.</p>
+      <div class="actions" style="margin-top:12px">
+        <button class="linkbtn" type="button" id="vback">Back to the Proclamation</button>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- PAGE 3: THE HELP DESK -->
+  <section id="desk" aria-labelledby="desk-title" hidden>
+    <div class="sheet-wrap"><div class="sheet">
+      <div class="deskhead">
+        <div>
+          <p class="eyebrow brandline" id="desk-eyebrow" style="text-align:left">A Branch of The Unpleasant Pleasant</p>
+          <h1 class="title" id="desk-title" tabindex="-1">Thatch Support</h1>
+          <p class="tag">Thy woes, worsened since 1603.</p>
+        </div>
+        <div class="deskbtns">
+          <button class="linkbtn" type="button" id="change">Change village</button>
+          <button class="linkbtn" type="button" id="back">Back to the Proclamation</button>
+        </div>
+      </div>
+
+      <div class="vbanner">
+        <div id="desk-scene"></div>
+        <div>
+          <p class="vterrain" id="vb-terrain"></p>
+          <p class="vmotto" id="vb-motto"></p>
+          <p class="vpop" id="vb-pop"></p>
+          <span class="clabel" style="margin-top:8px">Prominent afflictions</span>
+          <ul class="vtags" id="vb-tags"></ul>
+        </div>
+      </div>
+
+      <dl class="status">
+        <div><dt>Thy place in the queue</dt><dd class="big" id="queue">4,127</dd></div>
+        <div><dt>Now serving</dt><dd>No. 3, called in 1649</dd></div>
+        <div><dt>Estimated wait</dt><dd>Till Michaelmas, or thy death, whichever is first</dd></div>
+      </dl>
+
+      <section class="part" id="lodge" aria-labelledby="lodge-h">
+        <h2 id="lodge-h">Tell Us Thy Woe</h2>
+        <p class="lede">Pick one from the list, or say it in thine own words. Our Brothers shall ponder it for as long as it taketh to find the door.</p>
+        <form id="grievance" novalidate>
+          <div class="row2">
+            <div class="field">
+              <label for="woe-name">Thy name, or what thy mother shouted</label>
+              <input id="woe-name" type="text" autocomplete="off" placeholder="Wat the Younger">
+            </div>
+            <div class="field">
+              <label for="woe-type">Nature of thy woe</label>
+              <select id="woe-type"><option value="">Choose thy woe</option></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="woe-text">Describe it, with feeling</label>
+            <textarea id="woe-text" placeholder="My cow hath eaten my roof and now standeth in my bed."></textarea>
+          </div>
+          <p class="error" id="form-error" role="alert" hidden></p>
+          <div class="formactions">
+            <button class="btn" type="submit">Nail thy woe to the door</button>
+          </div>
+        </form>
+        <div class="receipt" id="receipt" hidden></div>
+      </section>
+
+      <section class="part" id="local" aria-labelledby="local-h">
+        <h2 id="local-h">Woes Peculiar to Thy Parish</h2>
+        <p class="lede" id="local-lede"></p>
+        <div class="cards" id="vcards"></div>
+      </section>
+
+      <section class="part" id="common" aria-labelledby="common-h">
+        <h2 id="common-h">Woes Commonly Heard</h2>
+        <p class="lede">Many have suffered before thee. Open a notice to read what we told them. None came back to complain.</p>
+        <div class="cards" id="cards"></div>
+      </section>
+
+      <section class="part" id="door" aria-labelledby="door-h">
+        <h2 id="door-h">Posted Upon the Door</h2>
+        <p class="lede">Notices of the parish, nailed up in no order.</p>
+        <div class="slips">
+          <div class="slip"><b>Lost</b><p>One cow. Also the field she was in. Reward: the field.</p></div>
+          <div class="slip"><b>Wanted</b><p>Honest man to hold a horse. Dishonest men may hold two.</p></div>
+          <div class="slip"><b>Closed</b><p>The pump is shut until the pump can be found.</p></div>
+          <div class="slip"><b>Sermon</b><p>Sunday. The subject is thee. Attendance is not optional, and neither is the subject.</p></div>
+        </div>
+      </section>
+
+      <section class="part" id="fuq" aria-labelledby="fuq-h">
+        <h2 id="fuq-h">Questions Nobody Asked</h2>
+        <dl class="fuq">
+          <dt>Art thou qualified?</dt>
+          <dd>We own a hat. We share it.</dd>
+          <dt>Wilt thou answer me soon?</dt>
+          <dd>Sooner than thou canst fix it, which is not hard.</dd>
+          <dt>Is thy advice safe?</dt>
+          <dd>It is advice. Safety was never in the charter.</dd>
+          <dt>May I speak to a manager?</dt>
+          <dd>Our manager is a goose. She biteth.</dd>
+        </dl>
+      </section>
+
+      <hr class="rule">
+      <div class="fine">
+        <p>Thatch Support is not liable for plague, fire, flood, taxes, witches, or the Dutch.</p>
+        <p>Open from cockcrow till the candle dieth. Closed on holy days, unholy days, and Tuesdays.</p>
+        <p>For urgent matters, shout at the nearest hill and wait for an echo.</p>
+      </div>
+    </div></div>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
